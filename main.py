@@ -19,11 +19,11 @@ from firebase_admin import credentials,auth,db
 
 cred = credentials.Certificate("chatapp1.json")
 firebase_admin.initialize_app(cred,{
-	'databaseURL' : 'https://dipxplore-default-rtdb.firebaseio.com/'
+	'databaseURL' : 'your_firebase_database_url'
 })
 
 import google.generativeai as genai
-genai.configure(api_key="AIzaSyAM3BXp0lNX0AoBVqZQMK-ZN1AA0QZN_Yc")
+genai.configure(api_key="Gemini_api_key")
 
 # Set up the model
 generation_config = {
