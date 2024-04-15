@@ -1,0 +1,212 @@
+ScreenManager:
+    id: screen_manager
+    Login_page:
+    MainPage:
+    Signup_page:
+    
+
+
+<Login_page>:
+    name: "login"
+    MDLabel:
+        text : 'WELCOME'
+        font_style : 'H2'
+        pos_hint: {"center_x": .7, "center_y": .8}
+    MDTextField:
+        id : input_email
+        mode: "fill"
+        hint_text: "Email"
+        input_type: "text"
+        size_hint_x : .8
+        icon_right: "email"
+        pos_hint: {"center_x": .5, "center_y": .7}
+    MDTextField:
+        id : input_password
+        mode: "fill"
+        password: True
+        input_type: "text"
+        hint_text: "Password"
+        size_hint_x : .8
+        helper_text_mode: "persistent" 
+        min_text_length: 10
+        pos_hint: {"center_x": .5, "center_y": .6}
+    MDIconButton:
+        id : icons
+        icon : 'eye-off'
+        pos_hint: {"center_x": .85, "center_y": .6}
+        on_release: root.change_icon() 
+    MDFillRoundFlatIconButton:
+        icon: "login"
+        size_hint_x: .8
+        text: "Login"
+        pos_hint: {"center_x": .5, "center_y": .5}
+        on_release : root.login()
+    MDFillRoundFlatIconButton:
+        icon: "account-plus"
+        size_hint_x: .8
+        text: "Signup"
+        pos_hint: {"center_x": .5, "center_y": .4}
+        on_release : root.go_singup_page()
+    MDIconButton:
+    	id : theme_toggle
+    	icon : 'weather-night'
+    	pos_hint: {"center_x": .9, "center_y": .95}
+        on_release: root.toggle_theme()
+	MDLabel:
+		id : demo
+		text : ''
+<Signup_page>:
+    name: "signup"
+    MDLabel:
+        text: "Sign Up Page"
+        font_style: "H2"
+        pos_hint: {"center_x": .7, "center_y": .8}
+    MDTextField:
+        id : user_name
+        mode: "fill"
+        hint_text: "Full Name"
+        input_type: "text"
+        size_hint_x : .8
+        icon_right: "email"
+        pos_hint: {"center_x": .5, "center_y": .7}
+    MDTextField:
+        id : signup_email
+        mode: "fill"
+        hint_text: "Email"
+        input_type: "text"
+        size_hint_x : .8
+        icon_right: "email"
+        pos_hint: {"center_x": .5, "center_y": .6}
+    MDTextField:
+        id : signup_password
+        mode: "fill"
+        password: True
+        input_type: "text"
+        hint_text: "Password"
+        size_hint_x : .8
+        helper_text_mode: "persistent" 
+        min_text_length: 10
+        pos_hint: {"center_x": .5, "center_y": .5}
+    MDIconButton:
+        id : icons
+        icon : 'eye-off'
+        pos_hint: {"center_x": .85, "center_y": .5}
+        on_release: root.change_icon() 
+    MDFillRoundFlatIconButton:
+        icon: "account-plus"
+        size_hint_x: .8
+        text: "Signup"
+        pos_hint: {"center_x": .5, "center_y": .4}
+        on_release : root.signup()
+
+    MDFillRoundFlatIconButton:
+        icon: "login"
+        size_hint_x: .8
+        text: "Login"
+        pos_hint: {"center_x": .5, "center_y": .3}
+        on_release : root.go_login_page()
+    MDIconButton:
+    	id : theme_toggle
+    	icon : 'weather-night'
+    	pos_hint: {"center_x": .9, "center_y": .95}
+        on_release: root.toggle_theme()
+    MDIconButton:
+    	id : previous_page
+    	icon : 'arrow-left'
+    	pos_hint: {"center_x": .1, "center_y": .95}
+        on_release: root.goToPreviousPage()
+<Command>:
+    size_hint_y: None
+    pos_hint: {'right': .98}
+    height: self.texture_size[1]
+    padding: 12, 10
+    theme_text_color: 'Custom'
+    text_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgb: (0,0,1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [20, 20, 2, 20]
+
+<Response>:
+    size_hint_y: None
+    pos_hint: {'left': .97}
+    height: self.texture_size[1]
+    padding: 12, 10
+    theme_text_color: 'Custom'
+    text_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgb: (1, 170/255, 23/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [20, 20, 20, 2]
+            
+
+<MainPage>:
+    name: "MainPage"
+    chat_list: chat_list
+    message: message
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+        	id: drop_item
+        	title: 'JUTIR AI'
+        	left_action_items: [["menu", lambda x: app.menu.open()]]
+
+        ScrollView:	
+            BoxLayout:
+                id: chat_list
+                orientation: "vertical"
+                size: (root.width, root.height)
+                height: self.minimum_height
+                size_hint: None, None
+                pos_hint: {'top': 10}
+                spacing: 5
+                Response:
+                	id : 'responses'
+                	text : 'WELCOME'
+                	halign : 'center'
+                	
+                	font_size : '30sp'
+                
+
+        MDFloatLayout:
+            size_hint_y: .11
+            MDFloatLayout:
+                size_hint: .8, .75
+                pos_hint: {"center_x": .43, "center_y": .5}
+
+                canvas:
+                    Color:
+                        rgb: 238/255, 238/255, 238/255, 1
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [10, 10, 10, 10]
+                TextInput:
+                    id: message
+                    hint_text: 'Type ...'
+                    size_hint: 1, None
+                    padding: [28, 39]
+                    pos_hint: {"center_x": .5, "center_y": .6}
+                    multiline: False
+                    height: self.minimum_height
+                    cursor_color: 1, 170/255, 23/255, 1
+                    cursor_width: '1sp'
+                    foreground_color: 1, 170/255, 23/255, 1
+                    background_color: 0, 0, 0, 0
+                    input_type: 'text'
+                    
+                MDIconButton:
+                    icon: 'send'
+                    pos_hint: {"right": 1.2, "center_y": .5}
+                    id: send_btn
+                    user_font_size: '18sp'
+                    md_bg_color: 1, 170/255, 23/255, 1
+                    on_release: root.send()
